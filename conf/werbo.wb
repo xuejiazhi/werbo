@@ -1,6 +1,12 @@
 {
 	"base":{
 		"version":1.0,
-		"author":"jee"
-	}
+		"author":"jee",
+		"date":"2017/01/01"
+	},
+	"cgi":{
+		"prefix":"Cgi" //这是一
+	},
+	//包含a文件
+	$$a.swb$$
 }

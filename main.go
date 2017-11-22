@@ -1,12 +1,13 @@
 package main
 
-import (
-	"net/http"
-	"werbo/server"
-)
+import "werbo/utils"
+
+// func main() {
+// 	//创建一个httpserver
+// 	http.HandleFunc("/", server.IndexHandler)
+// 	server.CreateServer()
+// }
 
 func main() {
-	//创建一个httpserver
-	http.HandleFunc("/", server.IndexHandler)
-	server.CreateServer()
+	utils.LoadConfig("werbo", "base")
 }
