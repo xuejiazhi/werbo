@@ -1,7 +1,9 @@
 package main
 
-import "werbo/utils"
-
+import(
+	"fmt"
+	 "werbo/configure"
+)
 // func main() {
 // 	//创建一个httpserver
 // 	http.HandleFunc("/", server.IndexHandler)
@@ -9,5 +11,5 @@ import "werbo/utils"
 // }
 
 func main() {
-	utils.LoadConfig("werbo", "base")
+	fmt.Println(configure.LoadCfg("werbo", "base","date"))
 }

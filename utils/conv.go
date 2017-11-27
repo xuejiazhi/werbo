@@ -1,29 +1,28 @@
 package utils
 
 import (
-	"errors"
 	"reflect"
 	"strconv"
 )
 
 //interface TO MapInterface
-func InterfaceToMapInterface(in interface{}) (map[string]interface{}, error) {
-	var R_data = make(map[string]interface{})
-	item := reflect.ValueOf(in)
-	if item.Kind() == reflect.Map {
-		for _, k := range item.MapKeys() {
-			v := item.MapIndex(k)
-			kStr, _ := InterfaceToStr(k.Interface())
-			R_data[kStr] = v.Interface()
+func Inter2Map(inParam interface{}) (map[string]interface{}, bool) {
+	var reData = make(map[string]interface{})
+	outItem := reflect.ValueOf(inParam)
+	if outItem.Kind() == reflect.Map {
+		for _, k := range outItem.MapKeys() {
+			v := outItem.MapIndex(k)
+			kStr, _ := Inter2Str(k.Interface())
+			reData[kStr] = v.Interface()
 		}
 	} else {
-		return nil, errors.New("Interface To MapInterface is wrong!")
+		return nil, false
 	}
-	return R_data, nil
+	return reData, true
 } //end func InterfaceToMapInterface
 
 //interface 类型转string
-func InterfaceToStr(v interface{}) (string, bool) {
+func Inter2Str(v interface{}) (string, bool) {
 	var R_str string
 	switch v.(type) {
 	case string:
