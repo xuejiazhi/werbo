@@ -4,6 +4,9 @@
 		"author":"jee",
 		"date":"2017/01/01"
 	},
+	"server":{
+		"port":8080
+	}
 	"cgi":{
 		"prefix":"Cgi" //这是一
 	},

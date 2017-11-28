@@ -21,29 +21,33 @@ func Inter2Map(inParam interface{}) (map[string]interface{}, bool) {
 	return reData, true
 } //end func InterfaceToMapInterface
 
-//interface 类型转string
-func Inter2Str(v interface{}) (string, bool) {
-	var R_str string
-	switch v.(type) {
+//interface type to string type
+func Inter2Str(param interface{}) (string, bool) {
+	//def return data
+	ret := ""
+	//param type
+	switch param.(type) {
 	case string:
-		R_str = v.(string)
+		ret = param.(string)
 	case int:
-		R_str = strconv.Itoa(v.(int))
+		ret = strconv.Itoa(param.(int))
 	case int64:
-		R_str = strconv.FormatInt(v.(int64), 10)
+		ret = strconv.FormatInt(param.(int64), 10)
 	case int32:
-		R_str = strconv.FormatInt(int64(v.(int32)), 10)
+		ret = strconv.FormatInt(int64(param.(int32)), 10)
 	case int16:
-		R_str = strconv.FormatInt(int64(v.(int16)), 10)
+		ret = strconv.FormatInt(int64(param.(int16)), 10)
 	case int8:
-		R_str = strconv.FormatInt(int64(v.(int8)), 10)
+		ret = strconv.FormatInt(int64(param.(int8)), 10)
 	case float64:
-		t := int(v.(float64))
-		R_str = strconv.Itoa(t)
+		t := int(param.(float64))
+		ret = strconv.Itoa(t)
 	case bool:
-		R_str = strconv.FormatBool(v.(bool))
+		ret = strconv.FormatBool(param.(bool))
 	default:
 		return "", false
 	}
-	return R_str, true
+
+	//return value
+	return ret, true
 } //end func InterfaceToStr

@@ -37,9 +37,10 @@ func (this *JsonCfg) LoadConfig() string {
 	json.Unmarshal([]byte(confInfo), &param)
 	// Transformation of subordinate configuration 
 	sonParam, _ := utils.Inter2Map(param[this.Key])
-	//返回
-	return sonParam["date"]
-}
+	//return 
+	ret,_ := utils.Inter2Str(sonParam["date"])
+	return ret
+} //end func LoadConfig
 
 //readfile of json
 func  readJsonFile(filename string) string {
