@@ -1,17 +1,15 @@
 package main
 
-import(
+import (
 	// "fmt"
 	//  "werbo/configure"
+
 	"net/http"
-	 "werbo/server"
+	"werbo/server"
 )
+
 func main() {
 	//创建一个httpserver
-	c:=server.CreateServer()
-	http.HandleFunc("/", c.IndexHandler) 
+	http.HandleFunc("/", server.IndexHandler)
+	server.CreateServer()
 }
-
-// func main() {
-// 	fmt.Println(configure.LoadCfg("werbo", "base","date"))
-// }

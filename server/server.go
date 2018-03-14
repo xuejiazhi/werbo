@@ -13,19 +13,18 @@ func init() {
 
 }
 
-type Server struct{
-	Port  string
+type Server struct {
+	Port string
 	Resp http.ResponseWriter
-	Req *http.Request
+	Req  *http.Request
 }
 
 //CreateServer of go
 func CreateServer() *Server {
 	//get port
-	Port,_ := configure.LoadCfg("werbo", "server","port")
-	
+	Port, _ := configure.LoadCfg("werbo", "server", "port")
 	//listen port
-	errCode := http.ListenAndServe(":" + Port, nil)
+	errCode := http.ListenAndServe(":"+Port, nil)
 	if errCode != nil {
 		log.Fatal("ListenAndServe: ", errCode)
 	}
@@ -34,23 +33,22 @@ func CreateServer() *Server {
 	retServer := new(Server)
 	retServer.Port = Port
 	return retServer
-}//end func CreateServer
-
+} //end func CreateServer
 
 //GET Handler
-func (this *Server) IndexHandler(rp http.ResponseWriter, rq *http.Request) {
+func IndexHandler(rp http.ResponseWriter, rq *http.Request) {
 	//Get URI
-	addrList := strings.Split(this.Req.RequestURI, "/")
-	
+	addrList := strings.Split(rq.RequestURI, "/")
+
 	var ret string
 	//judgement params
 	if len(addrList) >= 3 && addrList[1] != "" && addrList[2] != "" {
 		dir := string(addrList[1])
 		method := strings.TrimSpace(addrList[2])
-		ret = cgi.Say(dir, method, this.Req, this.Resp)
+		ret = cgi.Say(dir, method, rq, rp)
 	} else {
 		ret = "welcome use werbo go"
 	}
 	//write string
-	io.WriteString(this.Resp, ret)
-}//end func IndexHandler
+	io.WriteString(rp, ret)
+} //end func IndexHandler

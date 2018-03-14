@@ -16,15 +16,15 @@ import (
 	"werbo/utils"
 )
 
-type JsonCfg struct{
+type JsonCfg struct {
 	FileName, Key, Value string
 }
 
 //Factory method
-func  JsFactory(FileName, Key, Value string) *JsonCfg{
+func JsFactory(FileName, Key, Value string) *JsonCfg {
 	//返回
-	return &JsonCfg{FileName,Key,Value}
-}//end func Factory
+	return &JsonCfg{FileName, Key, Value}
+} //end func Factory
 
 //LoadJsonConfig
 //Get JSON configuration
@@ -32,25 +32,25 @@ func (this *JsonCfg) LoadConfig() string {
 	//Get the configuration content
 	confInfo := readJsonFile(this.FileName + "." + JSON_EXT_NAME)
 	//Turn into interface type
-	var param = make(map[string]interface{}, 0)
+	param := make(map[string]interface{}, 0)
 	//Turn into json
 	json.Unmarshal([]byte(confInfo), &param)
-	// Transformation of subordinate configuration 
+	//Transformation of subordinate configuration
 	sonParam, _ := utils.Inter2Map(param[this.Key])
-	//return 
-	ret,_ := utils.Inter2Str(sonParam["date"])
+	//return
+	ret, _ := utils.Inter2Str(sonParam[this.Value])
 	return ret
 } //end func LoadConfig
 
 //readfile of json
-func  readJsonFile(filename string) string {
+func readJsonFile(filename string) string {
 	//readfile
 	file, err := os.Open(CFG_PATH + "/" + filename)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "no "+filename+" config file!", err)
 		os.Exit(1)
 	}
-	
+
 	//close file
 	defer file.Close()
 	inputReader := bufio.NewReader(file)
@@ -64,9 +64,9 @@ func  readJsonFile(filename string) string {
 		inputStr = removeJsonNote(inputStr)
 		//Is there a child configuration?
 		sonCfgName := getJsonSonCfgName(inputStr)
-		// If  have, pick up the configuration 
+		// If  have, pick up the configuration
 		if sonCfgName != "" {
-			// Recursive call 
+			// Recursive call
 			inputStr = readJsonFile(sonCfgName) + "\n"
 		}
 		reStr = reStr + inputStr

@@ -5,6 +5,6 @@ import "net/http"
 type User struct {
 }
 
-func (this *User) Say(rq *http.Request, rp http.ResponseWriter) string {
+func (this *User) Cgi_say(rq *http.Request, rp http.ResponseWriter) string {
 	return "hahaha"
 }
